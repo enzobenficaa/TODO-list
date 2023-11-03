@@ -51,7 +51,7 @@ router.post("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    let checklist = await Checklist.findById(req.params.id);
+    let checklist = await Checklist.findById(req.params.id).populate("tasks");
     res.status(200).render("checklists/show", { checklist: checklist });
   } catch (error) {
     res
@@ -64,7 +64,8 @@ router.put("/:id", async (req, res) => {
   let { name } = req.body.checklist;
   let checklist = await Checklist.findById(req.params.id);
   try {
-    await checklist.update({ name });
+    checklist.name = name;
+    await checklist.save(); // o save serve tanto para criar quanto para atualizar
     res.redirect("/checklists");
   } catch (error) {
     console.log(error);
@@ -79,9 +80,11 @@ router.delete("/:id", async (req, res) => {
   try {
     let { name } = req.body;
     let checklist = await Checklist.findByIdAndRemove(req.params.id);
-    res.status(200).send(checklist);
+    res.redirect("/checklists");
   } catch (error) {
-    res.status(422).json(error);
+    res
+      .status(500)
+      .render("pages/error", { error: "Erro ao deletar as listas" });
   }
 });
 
