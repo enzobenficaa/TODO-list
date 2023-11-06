@@ -17,7 +17,7 @@ checklistDependentRoute.get("/:id/task/new", async (req, res) => {
   }
 });
 
-checklistDependentRoute.post("/:id/task/new", async (req, res) => {
+checklistDependentRoute.post("/:id/task", async (req, res) => {
   let { name } = req.body.task;
   let task = new Task({ name, checklist: req.params.id });
   try {
@@ -25,7 +25,7 @@ checklistDependentRoute.post("/:id/task/new", async (req, res) => {
     let checklist = checklist.findById(req.params.id);
     checklist.task.push(task);
     await checklist.save();
-    res.redirect(`checklists/${req.params.id}`);
+    res.redirect(`/checklists/${req.params.id}`);
   } catch (error) {
     let errors = error.errors;
     res.status(422).render("task/new", {
