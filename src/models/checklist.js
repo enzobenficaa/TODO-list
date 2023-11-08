@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const checklistSchema = mongoose.Schema({
   name: { type: String, required: true },
   tasks: [
@@ -9,5 +8,4 @@ const checklistSchema = mongoose.Schema({
     },
   ],
 });
-
 module.exports = mongoose.model("Checklist", checklistSchema);
