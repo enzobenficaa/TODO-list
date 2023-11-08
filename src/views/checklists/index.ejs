@@ -1,5 +1,5 @@
-<%- include("../layouts/header",{title: "Lista de Tarefas"}) %> <%-
-include("../layouts/menu") %>
+<%- include('../layouts/header', {title: 'Lista de tarefas' }) %> <%-
+include('../layouts/menu') %>
 <section class="section">
   <div class="container">
     <div class="columns">
@@ -7,14 +7,14 @@ include("../layouts/menu") %>
         <h1 class="title size-4">Listas de Tarefas</h1>
       </div>
       <div class="column is-one-fifth">
-        <a href="/checklists/new" class="button is-success is-small"
+        <a href="/checklist/new" class="button is-success is-small"
           >Nova Lista</a
         >
       </div>
     </div>
 
     <div class="columns is-multiline">
-      <% checklists.forEach(checklist =>{ %>
+      <% checklist.forEach(checklist=> { %>
       <div class="column is-one-quarter">
         <div class="card has-background-white-ter">
           <div class="card-content">
@@ -26,18 +26,18 @@ include("../layouts/menu") %>
           <footer class="card-footer">
             <p class="card-footer-item">
               <span>
-                <a href="/checklists/<%= checklist._id %>">Ver</a>
+                <a href="checklist/<%= checklist._id %>/">Ver</a>
               </span>
             </p>
             <p class="card-footer-item">
               <span>
-                <a href="/checklists/<%= checklist.id %>/edit">Editar</a>
+                <a href="checklist/<%= checklist.id %>/edit">Editar</a>
               </span>
             </p>
             <p class="card-footer-item">
               <span>
                 <a
-                  href="/checklists/<%=checklist.id %>?_method=delete"
+                  href="/checklist/<%= checklist.id %>?_method=delete"
                   class="has-text-danger"
                   >Remover</a
                 >
@@ -50,4 +50,4 @@ include("../layouts/menu") %>
     </div>
   </div>
 </section>
-<%- include("../layouts/footer") %>
+<%- include('../layouts/footer') %>
